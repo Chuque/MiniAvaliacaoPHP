@@ -109,13 +109,15 @@ else if ($action == 'postEditarFuncionario') {
 	
 	header("location:exibeFuncionarios");
 }
-else if ($action == 'deletarFuncionario') {
-	
-	include_once $_SESSION["root"].'php/View/ViewCadastraDepartamento.php';
-}
 else if ($action == 'postDeletarFuncionario') {
-	
-	include_once $_SESSION["root"].'php/View/ViewCadastraDepartamento.php';
+	if($_SESSION["idPermissao"] != 1){
+		header("location:permissaoNegada");
+	}
+	if(isset($_GET['id'])){
+		$cFunc = new ControllerFuncionario();
+		$cFunc->deletarFuncionario($_GET['id']);
+	}
+	header("location:exibeFuncionarios");
 }
 else if ($action == 'logout') {
 	session_unset();

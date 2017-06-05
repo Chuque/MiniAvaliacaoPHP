@@ -98,4 +98,19 @@ class ControllerFuncionario {
 			$_SESSION['flash']['salario'] = $funcionario->getSalario();
 		}
 	}
+
+	function deletarFuncionario($id){
+		$funcDAO = new FuncionarioDAO();
+
+		$resultadoInsercao = $funcDAO->deleteFuncionario($id);
+
+		if($resultadoInsercao){
+			$_SESSION['flash']['msg'] = "Funcionario removido com sucesso";
+			$_SESSION['flash']['sucesso'] = true;
+		}
+		else{
+			$_SESSION['flash']['msg'] = "O funcionario não foi removido";
+			$_SESSION['flash']['sucesso'] = false;
+		}
+	}
 }

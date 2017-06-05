@@ -1,6 +1,7 @@
 <?php
 $titulo="Exibir Funcionários";
 include $_SESSION["root"].'includes/header.php';
+include_once $_SESSION["root"].'php/Util/Util.php';
 ?>
 <body>
 	<div class="container" >
@@ -12,6 +13,13 @@ include $_SESSION["root"].'includes/header.php';
 			<?php
 				if(isset($_SESSION["senhaFoiAlterada"])){
 					echo"<div class='bg-success text-center msg'>Dados do Funcionário editado com sucesso</div>";
+				}
+				if(isset($_SESSION["flash"]["sucesso"])){
+					if($_SESSION["flash"]["sucesso"]==1){
+						echo"<div class='bg-success text-center msg'>{$_SESSION["flash"]["msg"]}</div>";
+					}else{
+						echo"<div class='bg-danger text-center msg'>{$_SESSION["flash"]["msg"]}</div>";
+					}
 				}
 			?>
 			<table class="table table-striped">
@@ -37,7 +45,7 @@ include $_SESSION["root"].'includes/header.php';
 						echo "<td>".$value->getDepartamento()->getNome()."</td>";
 						if($_SESSION["idPermissao"] == 1){
 							echo "<td><a href='editarFuncionario?id={$value->getIdFuncionario()}'><img src='includes/imgs/iconeEditar.png' alt='Editar' height='30' width='30'></a></td>";
-							echo "<td><a href='deletarFuncionario?id={$value->getIdFuncionario()}'><img src='includes/imgs/iconeDeletar.png' alt='Editar' height='30' width='30'></a></td>";
+							echo "<td><a href='postDeletarFuncionario?id={$value->getIdFuncionario()}'><img src='includes/imgs/iconeDeletar.png' alt='Editar' height='30' width='30'></a></td>";
 						}
 					echo "</tr>";
 				}

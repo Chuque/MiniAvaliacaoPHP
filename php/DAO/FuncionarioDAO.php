@@ -12,7 +12,7 @@ class FuncionarioDAO {
 			$conn = $instance->getConnection();
 
 			//Faço o select usando prepared statement
-			$statement = $conn->prepare("SELECT * FROM funcionario");		
+			$statement = $conn->prepare("SELECT * FROM funcionario WHERE funcionarioAtivo=1");		
 			$statement->execute();
 
 			//linhas recebe todas as tuplas retornadas do banco		
@@ -137,7 +137,7 @@ class FuncionarioDAO {
 	}
 
 	function updateFuncionarioSemSenha($funcionario){
-		$idFuncionario;
+		$idFuncionario = $funcionario->getIdFuncionario();
 
 		try{
 			if($idFuncionario){
@@ -156,6 +156,25 @@ class FuncionarioDAO {
 
 				return $statement->execute();
 			}
+		}
+		catch(PDOException $e){
+			echo "Erro ao atualizar o funcionario.".$e->getMessage();
+		}
+	}
+
+	function deleteFuncionario($id){
+
+		try{
+				$sql = "UPDATE funcionario SET funcionarioAtivo=0 WHERE idFuncionario=:id";
+
+				//pego uma ref da conexão
+				$instance = DatabaseConnection::getInstance();
+				$conn = $instance->getConnection();
+
+				$statement = $conn->prepare($sql);
+				$statement->bindValue(":id", $id);
+
+				return $statement->execute();
 		}
 		catch(PDOException $e){
 			echo "Erro ao atualizar o funcionario.".$e->getMessage();

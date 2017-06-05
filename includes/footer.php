@@ -6,5 +6,4 @@
 			unset($_SESSION["flash"][$key]);
 		}
 	}
-	Util::debug($_SESSION);
 	?>
