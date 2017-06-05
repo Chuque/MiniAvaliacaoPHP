@@ -137,11 +137,8 @@ class FuncionarioDAO {
 	}
 
 	function updateFuncionarioSemSenha($funcionario){
-		$idFuncionario = $funcionario->getIdFuncionario();
-
 		try{
-			if($idFuncionario){
-				$sql = "UPDATE funcionario SET nome=:nome, salario=:salario, login=:login, idPermissao=:idPermissao, idDepartamento=:idDepartamento WHERE idFuncionario=:$idFuncionario";
+				$sql = "UPDATE funcionario SET nome=:nome, salario=:salario, login=:login, idPermissao=:idPermissao, idDepartamento=:idDepartamento WHERE idFuncionario=:idFuncionario";
 
 				//pego uma ref da conexão
 				$instance = DatabaseConnection::getInstance();
@@ -153,9 +150,9 @@ class FuncionarioDAO {
 				$statement->bindValue(":login", $funcionario->getLogin());
 				$statement->bindValue(":idPermissao", $funcionario->getPermissao()->getIdPermissao());
 				$statement->bindValue(":idDepartamento", $funcionario->getDepartamento()->getIdDepartamento());
+				$statement->bindValue(":idFuncionario", $funcionario->getIdFuncionario());
 
 				return $statement->execute();
-			}
 		}
 		catch(PDOException $e){
 			echo "Erro ao atualizar o funcionario.".$e->getMessage();

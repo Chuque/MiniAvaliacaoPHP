@@ -77,13 +77,13 @@ else if ($action == 'postCadastraFuncionario') {
 	$cFunc = new ControllerFuncionario();
 	$cFunc->setFuncionario();
 	//Não tem retorno, os dados de sucesso ou falha estão na sessão
-	include_once $_SESSION["root"].'php/View/ViewCadastraFuncionario.php';
+	header("location:cadastraFuncionario");
 }
 else if ($action == 'postCadastraDepartamento') {
 	$cDep = new ControllerDepartamento();
 	$cDep->setDepartamento();
 	//Não tem retorno, os dados de sucesso ou falha estão na sessão
-	include_once $_SESSION["root"].'php/View/ViewCadastraDepartamento.php';
+	header("location:cadastraDepartamento");
 }
 else if ($action == 'editarFuncionario') {
 	if($_SESSION["idPermissao"] != 1){
@@ -120,14 +120,16 @@ else if ($action == 'postDeletarFuncionario') {
 	header("location:exibeFuncionarios");
 }
 else if ($action == 'logout') {
+	//limpa a sessao e redireciona para a index
 	session_unset();
 	header("location:index.php");
 }
 else if ($action == 'permissaoNegada') {
+	//tela de permissao negada caso alguem que nao seja root tente acessar alguma pagina nao permitida
 	include_once $_SESSION["root"].'php/View/ViewPermissaoNegada.php';
 }
 else {
-	echo "Página não encontrada!";
+	include_once $_SESSION["root"].'php/View/ViewPaginaNaoEncontrada.php';
 	//isso trata todo erro 404, podemos criar uma view mais elegante para exibir o aviso ao usuário.
 }
 

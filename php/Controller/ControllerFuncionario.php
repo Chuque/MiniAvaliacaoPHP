@@ -34,7 +34,6 @@ class ControllerFuncionario {
 		$funcionario = new ModelFuncionario();
 		$funcionario->setFuncionarioFromPOST();
 		$resultadoInsercao = $funcDAO->setFuncionario($funcionario);
-		Util::debug($funcionario);
 		
 		if($resultadoInsercao){
 			$_SESSION["flash"]["msg"]="Funcionário Cadastrado com Sucesso";
@@ -91,7 +90,7 @@ class ControllerFuncionario {
 			$_SESSION['flash']['sucesso'] = true;
 		}
 		else{
-			$_SESSION['flash']['msg'] = "Funcionario não foi atualizado";
+			$_SESSION['flash']['msg'] = "Erro ao atualizar Funcionario";
 			$_SESSION['flash']['sucesso'] = false;
 			$_SESSION['flash']['nome'] = $funcionario->getNome();
 			$_SESSION['flash']['login'] = $funcionario->getLogin();

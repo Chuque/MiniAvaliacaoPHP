@@ -37,11 +37,11 @@ include_once $_SESSION["root"].'php/Util/Util.php';
 								<?php
 									//exibe os departamentos cadastrados como opções no select
 									foreach($departamentos as $departamento){
-										if($departamento->getIdDepartamento == $funcionario->getDepartamento()->getIdDepartamento()){
+										if($departamento->getIdDepartamento() == $funcionario->getDepartamento()->getIdDepartamento()){
 											echo "<option value='{$departamento->getIdDepartamento()}' selected>".$departamento->getNome()."</option>";
 										}
 										else{
-											echo "<option value='{$departamento->getIdDepartamento()}' selected>".$departamento->getNome()."</option>";
+											echo "<option value='{$departamento->getIdDepartamento()}'>".$departamento->getNome()."</option>";
 										}
 									}
 								?>
@@ -63,7 +63,7 @@ include_once $_SESSION["root"].'php/Util/Util.php';
 							<select class="form-control" name="permissao" class="form-control" id="permissao" required>
 								<?php
 									foreach($permissoes as $permissao){
-										if($permissao->getIdPermissao == $funcionario->getPermissao()->getIdPermissao()){
+										if($permissao->getIdPermissao() == $funcionario->getPermissao()->getIdPermissao()){
 											echo "<option value='{$permissao->getIdPermissao()}' selected>{$permissao->getNivel()}</option>";
 										}
 										else{

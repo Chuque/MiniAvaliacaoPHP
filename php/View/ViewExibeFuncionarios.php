@@ -11,9 +11,6 @@ include_once $_SESSION["root"].'php/Util/Util.php';
 		<div id="principal">
 			<h1 class="text-center">Funcionários	</h1>
 			<?php
-				if(isset($_SESSION["senhaFoiAlterada"])){
-					echo"<div class='bg-success text-center msg'>Dados do Funcionário editado com sucesso</div>";
-				}
 				if(isset($_SESSION["flash"]["sucesso"])){
 					if($_SESSION["flash"]["sucesso"]==1){
 						echo"<div class='bg-success text-center msg'>{$_SESSION["flash"]["msg"]}</div>";

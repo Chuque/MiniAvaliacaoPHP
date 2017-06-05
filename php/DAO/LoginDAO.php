@@ -17,7 +17,7 @@ class LoginDAO {
 		$conn = $instance->getConnection();
 
 		//Faço o select usando prepared statement
-		$statement = $conn->prepare("SELECT * FROM funcionario WHERE login = :login");
+		$statement = $conn->prepare("SELECT * FROM funcionario WHERE login = :login AND funcionarioAtivo=1");
 		$statement->bindParam(':login', $login);
 		$statement->execute();
 
